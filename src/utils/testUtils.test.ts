@@ -23,13 +23,18 @@ describe('Route Utility Functions', () => {
 
     test('returns false for empty or null inputs', () => {
       expect(validateRouteFormat('')).toBe(false)
+      // @ts-expect-error - Testing null input
       expect(validateRouteFormat(null)).toBe(false)
+      // @ts-expect-error - Testing undefined input
       expect(validateRouteFormat(undefined)).toBe(false)
     })
 
     test('returns false for non-string inputs', () => {
+      // @ts-expect-error - Testing number input
       expect(validateRouteFormat(123)).toBe(false)
+      // @ts-expect-error - Testing object input
       expect(validateRouteFormat({})).toBe(false)
+      // @ts-expect-error - Testing array input
       expect(validateRouteFormat([])).toBe(false)
     })
 
@@ -62,7 +67,9 @@ describe('Route Utility Functions', () => {
     test('returns 0 for empty or null inputs', () => {
       expect(calculateBasicScore('', 'Go north')).toBe(0)
       expect(calculateBasicScore('Go north', '')).toBe(0)
+      // @ts-expect-error - Testing null input
       expect(calculateBasicScore(null, 'Go north')).toBe(0)
+      // @ts-expect-error - Testing null input
       expect(calculateBasicScore('Go north', null)).toBe(0)
     })
 
@@ -103,13 +110,18 @@ describe('Route Utility Functions', () => {
 
     test('returns empty array for empty or null inputs', () => {
       expect(extractStreetNames('')).toEqual([])
+      // @ts-expect-error - Testing null input
       expect(extractStreetNames(null)).toEqual([])
+      // @ts-expect-error - Testing undefined input
       expect(extractStreetNames(undefined)).toEqual([])
     })
 
     test('returns empty array for non-string inputs', () => {
+      // @ts-expect-error - Testing number input
       expect(extractStreetNames(123)).toEqual([])
+      // @ts-expect-error - Testing object input
       expect(extractStreetNames({})).toEqual([])
+      // @ts-expect-error - Testing array input
       expect(extractStreetNames([])).toEqual([])
     })
 

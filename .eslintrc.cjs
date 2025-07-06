@@ -55,13 +55,65 @@ module.exports = {
     'sonarjs/no-globals-shadowing': 'warn', // Warning for global shadowing
     
     // General ESLint rules
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'no-unused-vars': 'off', // Turn off base rule for TypeScript
     'no-console': 'warn',
     'prefer-const': 'error',
     'no-var': 'error',
-    'no-undef': 'error',
+    'no-undef': 'off', // TypeScript handles this
   },
   overrides: [
+    {
+      // TypeScript files configuration
+      files: ['**/*.ts', '**/*.tsx'],
+      extends: [
+        'eslint:recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:sonarjs/recommended-legacy',
+      ],
+      plugins: [
+        'react',
+        'react-hooks',
+        'react-refresh',
+        'sonarjs',
+        '@typescript-eslint',
+      ],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 2024,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: ['./tsconfig.json'],
+        tsconfigRootDir: __dirname,
+      },
+      rules: {
+        // TypeScript-specific rules
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        '@typescript-eslint/no-explicit-any': 'warn',
+        '@typescript-eslint/prefer-nullish-coalescing': 'error',
+        '@typescript-eslint/prefer-optional-chain': 'error',
+        '@typescript-eslint/no-non-null-assertion': 'warn',
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+        '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+        '@typescript-eslint/no-misused-promises': 'error',
+        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/await-thenable': 'error',
+        '@typescript-eslint/require-await': 'error',
+        
+        // Disable base rules that are covered by TypeScript
+        'no-unused-vars': 'off',
+        'no-undef': 'off',
+        'no-redeclare': 'off',
+        '@typescript-eslint/no-redeclare': 'error',
+        
+        // React rules for TypeScript
+        'react/prop-types': 'off', // TypeScript handles prop validation
+      },
+    },
     {
       // Test files configuration
       files: ['**/__tests__/**/*', '**/*.test.*', '**/*.spec.*', '**/setupTests.js'],
@@ -84,6 +136,8 @@ module.exports = {
       rules: {
         'sonarjs/no-duplicate-string': ['error', { threshold: 6 }], // More lenient for tests
         'no-console': 'off', // Allow console in tests
+        '@typescript-eslint/no-explicit-any': 'off', // Allow any in tests
+        '@typescript-eslint/no-non-null-assertion': 'off', // Allow non-null assertions in tests
       },
     },
     {

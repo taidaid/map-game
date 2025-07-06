@@ -9,6 +9,7 @@ export const mockGoogleMaps = {
       addListener: vi.fn(),
       getCenter: vi.fn(),
       getZoom: vi.fn(),
+      fitBounds: vi.fn(),
     })),
     
     Marker: vi.fn().mockImplementation(() => ({
@@ -18,8 +19,24 @@ export const mockGoogleMaps = {
       getPosition: vi.fn(),
     })),
     
+    Size: vi.fn().mockImplementation((width: number, height: number) => ({
+      width,
+      height,
+    })),
+    
+    Point: vi.fn().mockImplementation((x: number, y: number) => ({
+      x,
+      y,
+    })),
+    
+    LatLngBounds: vi.fn().mockImplementation(() => ({
+      extend: vi.fn(),
+      contains: vi.fn(),
+      getCenter: vi.fn(),
+    })),
+    
     DirectionsService: vi.fn().mockImplementation(() => ({
-      route: vi.fn().mockImplementation((request, callback) => {
+      route: vi.fn().mockImplementation((request: unknown, callback: (result: unknown, status: string) => void) => {
         // Mock successful route response
         const mockResponse = {
           routes: [{
@@ -76,7 +93,7 @@ export const mockGoogleMaps = {
       TERRAIN: 'terrain'
     },
     
-    LatLng: vi.fn().mockImplementation((lat, lng) => ({
+    LatLng: vi.fn().mockImplementation((lat: number, lng: number) => ({
       lat: () => lat,
       lng: () => lng,
       equals: vi.fn(),
@@ -92,13 +109,15 @@ export const mockGoogleMaps = {
 }
 
 // Setup global mock for Google Maps API
-export const setupGoogleMapsMock = () => {
+export const setupGoogleMapsMock = (): void => {
+  // @ts-expect-error - Global assignment for testing
   global.google = mockGoogleMaps
+  // @ts-expect-error - Global assignment for testing
   global.window.google = mockGoogleMaps
 }
 
 // Reset all mocks
-export const resetGoogleMapsMocks = () => {
+export const resetGoogleMapsMocks = (): void => {
   vi.clearAllMocks()
 }
 

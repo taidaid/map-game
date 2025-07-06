@@ -4,13 +4,5 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 
-// Global test setup
-global.beforeEach = beforeEach
-global.afterEach = afterEach
-global.beforeAll = beforeAll
-global.afterAll = afterAll
-global.describe = describe
-global.it = it
-global.test = test
-global.expect = expect
-global.vi = vi 
+// Vitest is configured to use these globals automatically
+// No need to manually assign them 
