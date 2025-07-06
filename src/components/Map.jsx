@@ -6,7 +6,7 @@ import './Map.css'
  * Map Component
  * Displays Google Maps with custom styling and markers
  */
-const Map = ({ 
+const MapComponent = ({ 
   apiKey,
   startPoint,
   endPoint,
@@ -121,7 +121,7 @@ const Map = ({
       map.fitBounds(bounds)
     }
 
-  }, [map, startPoint, endPoint])
+  }, [map, startPoint, endPoint, markers.start, markers.end])
 
   // Display/hide route
   useEffect(() => {
@@ -191,4 +191,4 @@ const Map = ({
   )
 }
 
-export default Map 
+export default MapComponent 

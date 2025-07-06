@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useGame } from '../hooks/useGame'
 import { mapsService } from '../services/maps'
 import { calculateScore, getScoreDescription, getScoreColor } from '../services/scoring'
-import Map from './Map'
+import MapComponent from './Map'
 import RouteInput from './RouteInput'
 import './Game.css'
 
@@ -51,6 +51,7 @@ const Game = ({
       game.setGameScore(score.score)
 
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Route calculation failed:', error)
       game.handleError('Failed to calculate route. Please try again.')
     } finally {
@@ -75,7 +76,7 @@ const Game = ({
   }
 
   // Handle map ready
-  const handleMapReady = (mapInstance) => {
+  const handleMapReady = (_mapInstance) => {
     game.startRouteInput()
   }
 
@@ -139,7 +140,7 @@ const Game = ({
 
         {/* Map Display */}
         <div className="map-section">
-          <Map
+          <MapComponent
             apiKey={apiKey}
             startPoint={game.startPoint}
             endPoint={game.endPoint}

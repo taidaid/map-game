@@ -99,13 +99,11 @@ class MapsService {
   addMarker(position, options = {}) {
     if (!this.map) throw new Error('Map not initialized')
 
-    const marker = new google.maps.Marker({
+    return new google.maps.Marker({
       position,
       map: this.map,
       ...options
     })
-
-    return marker
   }
 
   /**
@@ -183,6 +181,26 @@ class MapsService {
   }
 
   /**
+   * Safely remove HTML tags from text to prevent ReDoS
+   * @param {string} text - Text with HTML tags
+   * @returns {string} Text without HTML tags
+   */
+  removeHtmlTags(text) {
+    if (!text || typeof text !== 'string') return ''
+    
+    // Use a simple approach that doesn't rely on regex backtracking
+    return text
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .split('<')
+      .map((part, index) => index === 0 ? part : part.substring(part.indexOf('>') + 1))
+      .join('')
+  }
+
+  /**
    * Get route summary information
    * @param {Object} route - Route result from calculateRoute
    * @returns {Object} Route summary
@@ -197,7 +215,7 @@ class MapsService {
       distance: leg.distance.text,
       duration: leg.duration.text,
       steps: leg.steps.map(step => ({
-        instruction: step.instructions.replace(/<[^>]*>/g, ''), // Remove HTML tags
+        instruction: this.removeHtmlTags(step.instructions), // Remove HTML tags safely
         distance: step.distance.text,
         duration: step.duration.text
       }))

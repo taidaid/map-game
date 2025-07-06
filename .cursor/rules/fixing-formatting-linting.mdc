@@ -1,0 +1,20 @@
+---
+description: Fixing formatting and linting
+globs: *.tsx,*.ts,*.js
+alwaysApply: true
+---
+When encountering linting errors in any file within this project:
+
+1. Use `npx eslint --fix <filepath>` as the first approach to fix linting errors
+2. Only attempt manual fixes if ESLint auto-fix doesn't resolve all issues
+3. Apply this rule to all files showing linting errors, regardless of file type or location within the project
+
+Example usage:
+```bash
+npx eslint --fix src/utils/example.ts
+```
+
+This ensures:
+- Consistent code style across the codebase
+- Efficient handling of formatting issues
+- Adherence to project's ESLint rules

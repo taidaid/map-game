@@ -104,10 +104,17 @@ const extractDirections = (route) => {
  */
 const extractStreets = (route) => {
   // Look for patterns like "Main Street", "Oak Ave", etc.
-  const streetPattern = /(\w+)\s+(street|st|avenue|ave|road|rd|drive|dr|lane|ln|way|blvd|boulevard)/gi
-  const matches = route.match(streetPattern) || []
+  // Fixed: Use separate patterns to avoid backtracking issues
+  const streetSuffixes = ['boulevard', 'street', 'avenue', 'drive', 'lane', 'road', 'way', 'blvd', 'st', 'ave', 'rd', 'dr', 'ln']
+  const matches = []
   
-  return matches.map(match => match.toLowerCase().trim())
+  for (const suffix of streetSuffixes) {
+    const pattern = new RegExp(`(\\w+)\\s+${suffix}\\b`, 'gi')
+    const found = route.match(pattern) || []
+    matches.push(...found)
+  }
+  
+  return [...new Set(matches)].map(match => match.toLowerCase().trim())
 }
 
 /**
@@ -131,10 +138,37 @@ const extractLandmarks = (route) => {
  * @returns {Array} Array of distance indicators
  */
 const extractDistances = (route) => {
-  const distancePattern = /(\d+)\s*(meters?|m|kilometers?|km|miles?|mi|blocks?|minutes?|min)/gi
-  const matches = route.match(distancePattern) || []
+  // Fixed: Use separate patterns to avoid backtracking issues
+  const distanceUnits = ['kilometers', 'kilometer', 'minutes', 'minute', 'meters', 'meter', 'blocks', 'block', 'miles', 'mile', 'km', 'min', 'mi', 'm']
+  const matches = []
   
-  return matches.map(match => match.toLowerCase().trim())
+  for (const unit of distanceUnits) {
+    const pattern = new RegExp(`(\\d+)\\s*${unit}\\b`, 'gi')
+    const found = route.match(pattern) || []
+    matches.push(...found)
+  }
+  
+  return [...new Set(matches)].map(match => match.toLowerCase().trim())
+}
+
+/**
+ * Safely remove HTML tags from text to prevent ReDoS
+ * @param {string} text - Text with HTML tags
+ * @returns {string} Text without HTML tags
+ */
+const removeHtmlTags = (text) => {
+  if (!text || typeof text !== 'string') return ''
+  
+  // Use a simple approach that doesn't rely on regex backtracking
+  return text
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .split('<')
+    .map((part, index) => index === 0 ? part : part.substring(part.indexOf('>') + 1))
+    .join('')
 }
 
 /**
@@ -149,7 +183,7 @@ const extractRouteSteps = (googleRoute) => {
 
   const leg = googleRoute.routes[0].legs[0]
   return leg.steps.map(step => ({
-    instruction: step.instructions.replace(/<[^>]*>/g, '').toLowerCase(),
+    instruction: removeHtmlTags(step.instructions).toLowerCase(),
     distance: step.distance.text,
     duration: step.duration.text,
     direction: extractDirectionFromInstruction(step.instructions)
@@ -162,7 +196,7 @@ const extractRouteSteps = (googleRoute) => {
  * @returns {string} Direction keyword
  */
 const extractDirectionFromInstruction = (instruction) => {
-  const cleaned = instruction.replace(/<[^>]*>/g, '').toLowerCase()
+  const cleaned = removeHtmlTags(instruction).toLowerCase()
   
   if (cleaned.includes('turn left') || cleaned.includes('left')) return 'left'
   if (cleaned.includes('turn right') || cleaned.includes('right')) return 'right'
@@ -214,9 +248,7 @@ const calculateDirectionAccuracy = (userRoute, googleSteps) => {
   const userTurns = userDirections.filter(d => ['left', 'right'].includes(d)).length
   const googleTurns = googleDirections.filter(d => ['left', 'right'].includes(d)).length
   
-  const turnAccuracy = Math.abs(userTurns - googleTurns) <= 1 ? 100 : 50
-  
-  return turnAccuracy
+  return Math.abs(userTurns - googleTurns) <= 1 ? 100 : 50
 }
 
 /**
@@ -241,9 +273,9 @@ const calculateLandmarkScore = (userRoute) => {
  * @param {Array} googleSteps - Google route steps
  * @returns {number} Score 0-100
  */
-const calculateCompletenessScore = (userRoute, googleSteps) => {
+const calculateCompletenessScore = (userRoute, _googleSteps) => {
   const wordCount = userRoute.wordCount
-  const stepCount = googleSteps.length
+  const stepCount = _googleSteps.length
   
   // Ideal range: 3-5 words per step
   const idealWords = stepCount * 4
@@ -262,7 +294,7 @@ const calculateCompletenessScore = (userRoute, googleSteps) => {
  * @param {Array} googleSteps - Google route steps
  * @returns {Array} Array of feedback messages
  */
-const generateFeedback = (breakdown, userRoute, googleSteps) => {
+const generateFeedback = (breakdown, userRoute, _googleSteps) => {
   const feedback = []
   
   // Route match feedback

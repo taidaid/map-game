@@ -50,8 +50,8 @@ export const extractStreetNames = (route) => {
     return []
   }
   
-  // Simple pattern to find "on [street name]" or "onto [street name]"
-  const streetPattern = /(?:on|onto)\s+([a-zA-Z\s]+?)(?:\.|,|$|turn)/gi
+  // Fixed: Use a more specific pattern to avoid backtracking issues
+  const streetPattern = /(?:on|onto)\s+([\w ]{1,50})(?:\.|,|$|turn)/gi
   const matches = []
   let match
   

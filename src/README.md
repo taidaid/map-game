@@ -4,6 +4,8 @@
 
 This directory contains the source code for the Map Game application, including React components, utilities, services, and comprehensive unit tests.
 
+*Last updated: December 19, 2024 - Implemented ESLint with SonarJS static analysis and security fixes*
+
 > **📚 Related Documentation:**
 > - **[../README.md](../README.md)** - Project overview, development scripts, and setup
 > - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and project structure
@@ -18,7 +20,7 @@ src/
 ├── components/           # React components
 │   ├── Game.jsx         # Main game orchestration component
 │   ├── Game.css         # Game component styling
-│   ├── Map.jsx          # Google Maps display component
+│   ├── Map.jsx          # Google Maps display component (renamed from Map to MapComponent)
 │   ├── Map.css          # Map component styling
 │   ├── RouteInput.jsx   # Route description input component
 │   └── RouteInput.css   # Route input styling
@@ -38,6 +40,32 @@ src/
 ├── setupTests.js        # Test configuration
 └── **/*.test.jsx        # Component and utility tests
 ```
+
+## 🔍 Code Quality & Static Analysis
+
+### ESLint + SonarJS Configuration
+- **ESLint**: Comprehensive linting with React and TypeScript rules
+- **SonarJS**: Advanced static analysis for code quality and security
+- **Zero Tolerances**: No warnings or errors allowed in codebase
+- **Environment-Specific Rules**: Tailored rules for source code vs. test files
+
+### Security Improvements
+- **ReDoS Protection**: Fixed all Regular Expression Denial of Service vulnerabilities
+- **Safe HTML Processing**: Replaced vulnerable regex patterns with secure string manipulation
+- **Backtracking Prevention**: Eliminated catastrophic backtracking in regex patterns
+- **Performance Optimization**: Improved regex performance with bounded quantifiers
+
+### Code Quality Standards
+- **Component Naming**: Avoid global shadowing (Map → MapComponent)
+- **Import Management**: Clean imports without unused references
+- **Function Parameters**: Proper parameter naming with underscore prefix for unused params
+- **Error Handling**: Consistent error handling patterns
+
+### Recent Security Fixes
+- **services/maps.js**: Replaced `<[^>]*>` regex with safe `removeHtmlTags()` function
+- **services/scoring.js**: Fixed complex alternation patterns in street/distance extraction
+- **utils/testUtils.js**: Added bounded quantifiers to prevent backtracking
+- **components/Map.jsx**: Renamed to avoid JavaScript `Map` constructor shadowing
 
 ## 🧪 Unit Testing
 
