@@ -4,6 +4,13 @@
 
 This directory contains end-to-end (E2E) tests for the Map Game application using Playwright. The tests verify the complete application behavior from a user's perspective across multiple browsers.
 
+> **📚 Related Documentation:**
+> - **[../README.md](../README.md)** - Project overview, quick start, and development progress
+> - **[../src/README.md](../src/README.md)** - Unit testing with Vitest & React Testing Library
+> - **[../QA.md](../QA.md)** - Overall testing strategy and quality assurance
+> - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and technology stack
+> - **[../PRODUCT.md](../PRODUCT.md)** - Product vision, features, and user experience
+
 ## Directory Structure
 
 ```
@@ -58,6 +65,11 @@ npm run test:all
 Tests run on:
 - ✅ **Desktop**: Chrome, Firefox, Safari, Edge
 - ✅ **Mobile**: Mobile Chrome, Mobile Safari
+
+### Test Coverage
+- **Total Tests**: 102 passing tests across all browsers and devices
+- **Cross-Browser**: Consistent results across all supported browsers
+- **Mobile Testing**: Responsive design validation on mobile viewports
 
 ## Key Features
 
@@ -205,4 +217,11 @@ When adding new tests:
 2. Add appropriate documentation
 3. Ensure tests are cross-browser compatible
 4. Update fixtures if needed
-5. Run full test suite before committing 
+5. Run full test suite before committing
+
+## 🔗 Next Steps
+
+- **[../src/README.md](../src/README.md)** - Learn about unit testing approach
+- **[../QA.md](../QA.md)** - Explore comprehensive testing strategy  
+- **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Understand technical architecture
+- **[../README.md](../README.md)** - Return to project overview 

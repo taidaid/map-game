@@ -1,3 +1,6 @@
+---
+alwaysApply: true
+---
 # Automated Validation & Self-Correcting Feedback Loop
 
 This rule ensures code quality through automated tooling and prevents regressions through comprehensive testing.

@@ -148,31 +148,50 @@ See **[PRODUCT.md](./PRODUCT.md)** for complete feature specifications and **[AR
 
 ## 📚 Documentation
 
+Our documentation is organized for easy navigation with small context windows:
+
+### Core Documentation
 - **[PRODUCT.md](./PRODUCT.md)** - Complete product vision, features, user experience, and game mechanics
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Technical planning, technology stack, and implementation details
 - **[QA.md](./QA.md)** - Testing strategy, unit testing with Vitest, and E2E testing with Playwright
 
+### Specialized Documentation
+- **[src/README.md](./src/README.md)** - Unit testing with Vitest & React Testing Library
+- **[e2e/README.md](./e2e/README.md)** - End-to-end testing with Playwright
+- **[.cursor/rules/README.md](./.cursor/rules/README.md)** - Cursor rules and development automation
+
+### Navigation Tips
+Each document includes:
+- **Related Documentation** section at the top for context
+- **Next Steps** section at the bottom for navigation
+- Cross-references throughout for easy topic jumping
+
+### Documentation Map
+```
+README.md (you are here)
+├── PRODUCT.md ─── Product vision & features
+├── ARCHITECTURE.md ─── Technical architecture
+├── QA.md ─── Testing strategy
+├── src/README.md ─── Unit testing details
+├── e2e/README.md ─── E2E testing details
+└── .cursor/rules/README.md ─── Development automation
+```
+
 ## 🧪 Testing
 
-### Unit Tests
-- **Framework**: Vitest + React Testing Library
-- **Coverage**: 100% on application code
-- **Tests**: 32 passing tests covering components and utilities
-- **Location**: `src/**/*.test.jsx`
+We maintain comprehensive test coverage with both unit tests and end-to-end testing.
 
-### E2E Tests  
-- **Framework**: Playwright
-- **Coverage**: 102 passing tests across all browsers
-- **Browsers**: Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari
-- **Location**: `e2e/tests/`
-
-### Test Commands
+### Quick Test Commands
 ```bash
 npm run test           # Unit tests
 npm run test:e2e       # E2E tests
 npm run test:all       # Both unit and E2E tests
 npm run test:coverage  # Coverage report
 ```
+
+### Detailed Testing Documentation
+- **[src/README.md](./src/README.md)** - Unit testing with Vitest & React Testing Library
+- **[e2e/README.md](./e2e/README.md)** - E2E testing with Playwright
 
 ## 🏛️ Architecture
 

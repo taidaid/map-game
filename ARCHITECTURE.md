@@ -3,6 +3,13 @@
 ## Overview
 This document outlines the technology stack options for the **Blind Navigator** map game, from proof of concept to full-scale application.
 
+> **📚 Related Documentation:**
+> - **[README.md](./README.md)** - Project overview, quick start, and development progress
+> - **[PRODUCT.md](./PRODUCT.md)** - Product vision, features, and user experience
+> - **[QA.md](./QA.md)** - Testing strategy and quality assurance
+> - **[src/README.md](./src/README.md)** - Unit testing and source code details
+> - **[e2e/README.md](./e2e/README.md)** - End-to-end testing with Playwright
+
 ## POC Technology Stack (Recommended)
 
 ### **Frontend: React + Vite**
@@ -255,4 +262,12 @@ src/
 4. **Plan data models** even if not persisting yet
 5. **Use environment variables** for API keys
 
-This approach lets you **start simple** but **scale smartly** without major rewrites. 
+This approach lets you **start simple** but **scale smartly** without major rewrites.
+
+## 🔗 Next Steps
+
+- **[src/README.md](./src/README.md)** - Explore unit testing and source code structure
+- **[e2e/README.md](./e2e/README.md)** - Learn about end-to-end testing approach
+- **[QA.md](./QA.md)** - Review comprehensive testing strategy
+- **[PRODUCT.md](./PRODUCT.md)** - Understand product vision and features
+- **[README.md](./README.md)** - Return to project overview 
