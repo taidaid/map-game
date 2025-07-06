@@ -67,6 +67,48 @@ npm run test:e2e:ui  # Run E2E tests with interactive UI
 npm run test:e2e:headed # Run E2E tests in headed mode
 npm run test:all     # Run both unit and E2E tests (all browsers)
 npm run test:all:dev # Run both unit and E2E tests (Chromium only)
+
+# Commit Management
+npm run commit       # Interactive commit with Commitizen (recommended)
+```
+
+## ⚛️ Atomic Commits & Commit Discipline
+
+### Using Commitizen for Standardized Commits
+We use **Commitizen** to enforce consistent, conventional commit messages:
+
+```bash
+# Instead of: git commit -m "fix stuff"
+npm run commit
+```
+
+This opens an interactive prompt that guides you through:
+- **Type**: feat, fix, docs, style, refactor, test, chore
+- **Scope**: Optional component/area affected  
+- **Description**: Clear, concise summary
+- **Body**: Detailed explanation (optional)
+- **Breaking Changes**: If applicable
+
+### Atomic Commit Principles
+Each commit should:
+- ✅ **Single Purpose**: Accomplish exactly one specific goal
+- ✅ **Minimal Changes**: 1-3 files, <50 lines of changes  
+- ✅ **Self-Contained**: Can be safely reverted independently
+- ✅ **Testable**: Includes tests and passes all existing tests
+- ✅ **Clear Message**: Conventional commit format with descriptive summary
+
+**Good Examples:**
+```
+feat: add route input validation
+fix: correct map marker positioning  
+test: add unit tests for scoring service
+docs: update installation instructions
+```
+
+**Avoid:**
+```
+feat: implement complete Google Maps integration with scoring and UI
+fix: various bugs and add new features
 ```
 
 ## 🔒 Git Hooks & Documentation Enforcement

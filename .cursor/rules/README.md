@@ -4,6 +4,16 @@ This directory contains comprehensive cursor rules that implement a self-correct
 
 ## 📋 Available Rules
 
+### ⚛️ [`atomic-commits.mdc`](./atomic-commits.mdc)
+**Purpose**: Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes
+
+**Key Features**:
+- Single purpose principle enforcement
+- Atomic commit size guidelines (1-3 files, <50 lines)
+- Conventional commit format examples
+- Change breakdown strategies
+- Integration with testing workflow
+
 ### 🔄 [`automated-validation.mdc`](./automated-validation.mdc)
 **Purpose**: Enforces automated validation and self-correcting feedback through testing and tooling
 
@@ -23,15 +33,6 @@ This directory contains comprehensive cursor rules that implement a self-correct
 - Cross-reference validation
 - Single source of truth principle
 - Automated consolidation guidance
-
-### 🔄 [`atomic-commits.mdc`](./atomic-commits.mdc)
-**Purpose**: Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes
-
-**Key Features**:
-- Single-purpose commit enforcement
-- Minimal change requirements
-- Testable changes only
-- Clear commit messages
 
 ### 📚 [`documentation-progress.mdc`](./documentation-progress.mdc)
 **Purpose**: Maintains comprehensive documentation and progress tracking
@@ -158,6 +159,8 @@ As the project evolves, these rules can be extended to include:
 ## Recent Updates
 
 **2024-12-19**: 
+- **Atomic Commits**: Added `atomic-commits.mdc` rule to encourage minimal, focused commits with single-purpose changes and conventional commit format.
+- **Commitizen Integration**: Installed and configured Commitizen (`npm run commit`) for interactive, standardized commit message creation.
 - **Documentation Consolidation**: Implemented comprehensive documentation consolidation to eliminate duplicate knowledge across all documentation files. Added `documentation-consolidation.mdc` rule to prevent future duplication.
 - **Single Source of Truth**: Established clear authority map where each type of information exists in only one authoritative document with cross-references instead of duplication.
 - **Enhanced Navigation**: All documentation now includes Related Documentation sections and Next Steps navigation to minimize context switching during development. 
