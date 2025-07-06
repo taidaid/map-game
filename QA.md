@@ -435,16 +435,23 @@ export class GamePage {
 ```json
 {
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
     "test:e2e": "playwright test",
+    "test:e2e:dev": "playwright test --project=chromium",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:headed": "playwright test --headed",
-    "test:all": "npm run test && npm run test:e2e"
+    "test:all": "npm run test -- --run && npm run test:e2e",
+    "test:all:dev": "npm run test -- --run && npm run test:e2e:dev"
   }
 }
 ```
+
+**Development vs Comprehensive Testing:**
+- **Development workflow**: Use `test:e2e:dev` and `test:all:dev` for fast feedback (Chromium only)
+- **Comprehensive testing**: Use `test:e2e` and `test:all` for full browser coverage (CI/pre-release)
+- **Browser coverage**: Full suite tests 7 configurations (Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari, Chromium)
 
 ## Code Quality Tools
 
@@ -673,12 +680,19 @@ This tool is part of our comprehensive quality assurance strategy, ensuring that
 - [x] **Developer Workflow** - Seamless integration with development process
 - [x] **Comprehensive Coverage** - All code changes require corresponding documentation
 
-### 🔄 Enhanced Testing (In Progress)
-- [ ] **API Testing** - Test Google Maps API integration
+### ✅ Enhanced Testing (Completed)
+- [x] **Development Testing Scripts** - Fast Chromium-only testing for development workflow
+- [x] **Updated Test Structure** - Page Object Model updated for actual game interface
+- [x] **Test Fixtures** - Updated test data for game functionality instead of placeholder content
+- [x] **Cross-State Testing** - Tests handle loading, error, and main interface states
+- [x] **Performance Testing** - Network throttling and slow loading scenario testing
+- [x] **Accessibility Testing** - Flexible heading structure and basic a11y validation
+
+### 📅 Advanced Testing (Future)
+- [ ] **API Testing** - Test Google Maps API integration with real API key
 - [ ] **Mock Services** - Advanced mocking for external dependencies
 - [ ] **Visual Regression Testing** - Automated UI change detection
 - [ ] **Performance Benchmarking** - Detailed performance metrics and thresholds
-- [ ] **Accessibility Compliance** - Full WCAG 2.1 AA compliance testing
 - [ ] **Security Testing** - API key protection and XSS prevention
 
 ### 📅 Future Testing (Planned)

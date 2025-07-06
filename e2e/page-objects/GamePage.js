@@ -6,27 +6,44 @@ export class GamePage {
   constructor(page) {
     this.page = page
     
-    // Selectors for main page elements
+    // Selectors for main game elements
     this.selectors = {
-      title: 'h1',
-      helloWorld: 'text=Hello World! 🗺️',
-      description: 'text=This is the proof of concept for the Blind Navigator map game.',
-      comingSoonHeading: 'text=Coming Soon:',
-      featuresList: 'ul',
-      container: '.container',
-      featuresSection: '.features'
+      title: 'h1', // Main title in game header
+      gameContainer: '.game-container',
+      gameHeader: '.game-header',
+      gameContent: '.game-content',
+      gameLoading: '.game-loading',
+      gameError: '.game-error',
+      progressSteps: '.progress-steps',
+      mapSection: '.map-section',
+      inputSection: '.input-section',
+      resultsSection: '.results-section'
     }
     
-    // Future selectors for when game functionality is added
+    // Game-specific selectors
     this.gameSelectors = {
-      mapContainer: '[data-testid="map-container"]',
-      routeInput: '[data-testid="route-input"]',
-      submitButton: '[data-testid="submit-route"]',
-      resultsSection: '[data-testid="results-section"]',
-      scoreDisplay: '[data-testid="score-display"]',
-      googleRoute: '[data-testid="google-route"]',
-      startMarker: '[data-testid="start-marker"]',
-      endMarker: '[data-testid="end-marker"]'
+      mapContainer: '#map',
+      routeInput: 'textarea[placeholder*="describe how you would walk"]',
+      submitButton: 'button[type="submit"]',
+      scoreDisplay: '.score-display',
+      scoreNumber: '.score-number',
+      scoreDescription: '.score-description h3',
+      scoreBreakdown: '.score-breakdown',
+      newRoundButton: 'button:has-text("New Round")',
+      resetButton: 'button:has-text("Reset Game")',
+      startMarker: 'img[alt="Start Point"]',
+      endMarker: 'img[alt="End Point"]'
+    }
+    
+    // Game states
+    this.gameStates = {
+      IDLE: 'idle',
+      LOADING: 'loading', 
+      MAP_LOADED: 'mapLoaded',
+      ROUTE_INPUT: 'routeInput',
+      CALCULATING: 'calculating',
+      RESULTS: 'results',
+      ERROR: 'error'
     }
   }
 
@@ -42,72 +59,160 @@ export class GamePage {
    * Wait for the page to fully load
    */
   async waitForLoad() {
-    await this.page.waitForSelector(this.selectors.title)
-    await this.page.waitForSelector(this.selectors.container)
+    // Wait for either the main game interface or loading state
+    await this.page.waitForSelector(this.selectors.gameContainer)
+    
+    // Wait for either the main title or loading message
+    try {
+      await this.page.waitForSelector(this.selectors.title, { timeout: 5000 })
+    } catch {
+      // If no h1, might be in loading state with h2
+      await this.page.waitForSelector('h2', { timeout: 5000 })
+    }
   }
 
   /**
    * Get the page title text
    */
   async getTitle() {
-    return await this.page.textContent(this.selectors.title)
+    // Try h1 first, then h2 for loading states
+    try {
+      return await this.page.textContent(this.selectors.title)
+    } catch {
+      return await this.page.textContent('h2')
+    }
   }
 
   /**
-   * Check if the Hello World message is visible
+   * Check if the game is in loading state
    */
-  async isHelloWorldVisible() {
-    return await this.page.isVisible(this.selectors.helloWorld)
+  async isInLoadingState() {
+    return await this.page.isVisible(this.selectors.gameLoading)
   }
 
   /**
-   * Check if the description is visible
+   * Check if the game is in error state
    */
-  async isDescriptionVisible() {
-    return await this.page.isVisible(this.selectors.description)
+  async isInErrorState() {
+    return await this.page.isVisible(this.selectors.gameError)
   }
 
   /**
-   * Check if the Coming Soon section is visible
+   * Check if the main game interface is visible
    */
-  async isComingSoonVisible() {
-    return await this.page.isVisible(this.selectors.comingSoonHeading)
+  async isGameInterfaceVisible() {
+    return await this.page.isVisible(this.selectors.gameHeader) &&
+           await this.page.isVisible(this.selectors.gameContent)
   }
 
   /**
-   * Get all feature list items
+   * Check if the map is visible
    */
-  async getFeatureItems() {
-    const listItems = await this.page.locator(`${this.selectors.featuresList} li`)
-    return await listItems.allTextContents()
+  async isMapVisible() {
+    return await this.page.isVisible(this.selectors.mapSection)
   }
 
   /**
-   * Check if all expected features are displayed
+   * Check if the route input section is visible
    */
-  async hasAllExpectedFeatures() {
-    const expectedFeatures = [
-      'Interactive map without street names',
-      'Route description interface', 
-      'Route comparison with Google Maps',
-      'Scoring system'
-    ]
-    
-    const actualFeatures = await this.getFeatureItems()
-    
-    return expectedFeatures.every(feature => 
-      actualFeatures.some(actual => actual.includes(feature))
-    )
+  async isRouteInputVisible() {
+    return await this.page.isVisible(this.selectors.inputSection)
   }
 
   /**
-   * Check if the page has proper CSS styling applied
+   * Check if the results section is visible
+   */
+  async isResultsVisible() {
+    return await this.page.isVisible(this.selectors.resultsSection)
+  }
+
+  /**
+   * Get the current game progress step
+   */
+  async getCurrentStep() {
+    const activeStep = await this.page.locator('.step.active').first()
+    return await activeStep.textContent()
+  }
+
+  /**
+   * Enter route description
+   */
+  async enterRoute(routeText) {
+    await this.page.fill(this.gameSelectors.routeInput, routeText)
+  }
+
+  /**
+   * Submit route
+   */
+  async submitRoute() {
+    await this.page.click(this.gameSelectors.submitButton)
+  }
+
+  /**
+   * Get the score number
+   */
+  async getScore() {
+    return await this.page.textContent(this.gameSelectors.scoreNumber)
+  }
+
+  /**
+   * Get the score description
+   */
+  async getScoreDescription() {
+    return await this.page.textContent(this.gameSelectors.scoreDescription)
+  }
+
+  /**
+   * Wait for map to load
+   */
+  async waitForMapLoad() {
+    await this.page.waitForSelector(this.gameSelectors.mapContainer, { timeout: 10000 })
+  }
+
+  /**
+   * Wait for route input to be available
+   */
+  async waitForRouteInput() {
+    await this.page.waitForSelector(this.gameSelectors.routeInput, { timeout: 10000 })
+  }
+
+  /**
+   * Wait for results to be displayed
+   */
+  async waitForResults() {
+    await this.page.waitForSelector(this.selectors.resultsSection, { timeout: 15000 })
+  }
+
+  /**
+   * Click new round button
+   */
+  async clickNewRound() {
+    await this.page.click(this.gameSelectors.newRoundButton)
+  }
+
+  /**
+   * Click reset game button
+   */
+  async clickResetGame() {
+    await this.page.click(this.gameSelectors.resetButton)
+  }
+
+  /**
+   * Check if the page has proper game styling applied
    */
   async hasProperStyling() {
-    const container = this.page.locator(this.selectors.container)
-    const featuresSection = this.page.locator(this.selectors.featuresSection)
+    const gameContainer = this.page.locator(this.selectors.gameContainer)
     
-    return await container.isVisible() && await featuresSection.isVisible()
+    // Game container should always be visible
+    const isGameContainerVisible = await gameContainer.isVisible()
+    
+    // Check if we're in a valid state (loading, error, or main game)
+    const isLoading = await this.isInLoadingState()
+    const isError = await this.isInErrorState()
+    const isGameVisible = await this.isGameInterfaceVisible()
+    
+    // Should have game container and be in one of the valid states
+    return isGameContainerVisible && (isLoading || isError || isGameVisible)
   }
 
   /**
@@ -120,47 +225,22 @@ export class GamePage {
     })
   }
 
-  // Future methods for when game functionality is implemented
-  
   /**
-   * Wait for map to load (future implementation)
+   * Get all visible progress steps
    */
-  async waitForMapLoad() {
-    await this.page.waitForSelector(this.gameSelectors.mapContainer, { timeout: 10000 })
+  async getProgressSteps() {
+    const steps = await this.page.locator('.step')
+    return await steps.allTextContents()
   }
 
   /**
-   * Enter route description (future implementation)
+   * Check if game has loaded successfully (not in loading or error state)
    */
-  async enterRoute(routeText) {
-    await this.page.fill(this.gameSelectors.routeInput, routeText)
-  }
-
-  /**
-   * Submit route (future implementation)
-   */
-  async submitRoute() {
-    await this.page.click(this.gameSelectors.submitButton)
-  }
-
-  /**
-   * Get score display text (future implementation)
-   */
-  async getScore() {
-    return await this.page.textContent(this.gameSelectors.scoreDisplay)
-  }
-
-  /**
-   * Check if results section is visible (future implementation)
-   */
-  async isResultsVisible() {
-    return await this.page.isVisible(this.gameSelectors.resultsSection)
-  }
-
-  /**
-   * Check if Google route is displayed (future implementation)
-   */
-  async isGoogleRouteVisible() {
-    return await this.page.isVisible(this.gameSelectors.googleRoute)
+  async hasGameLoaded() {
+    const isLoading = await this.isInLoadingState()
+    const isError = await this.isInErrorState()
+    const isGameVisible = await this.isGameInterfaceVisible()
+    
+    return !isLoading && !isError && isGameVisible
   }
 } 

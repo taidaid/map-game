@@ -30,21 +30,24 @@ e2e/
 ## Available Scripts
 
 ```bash
-# Run all E2E tests
-npm run test:e2e
+# Development workflow (fast)
+npm run test:e2e:dev      # Run E2E tests (Chromium only)
+npm run test:all:dev      # Run both unit and E2E tests (Chromium only)
 
-# Run tests with UI mode (interactive)
-npm run test:e2e:ui
+# Comprehensive testing (CI/pre-release)
+npm run test:e2e          # Run all E2E tests (all browsers)
+npm run test:all          # Run both unit and E2E tests (all browsers)
 
-# Run tests in headed mode (see browser)
-npm run test:e2e:headed
-
-# Run tests with debug mode
-npm run test:e2e:debug
-
-# Run both unit and E2E tests
-npm run test:all
+# Interactive and debug modes
+npm run test:e2e:ui       # Run tests with UI mode (interactive)
+npm run test:e2e:headed   # Run tests in headed mode (see browser)
+npm run test:e2e:debug    # Run tests with debug mode
 ```
+
+**Development vs Comprehensive Testing:**
+- **Development**: Use `:dev` scripts for fast feedback (Chromium only)
+- **CI/Pre-release**: Use full scripts for complete browser coverage (7 configurations)
+- **Browser coverage**: Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari, Chromium
 
 ## Test Categories
 

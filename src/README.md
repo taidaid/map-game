@@ -16,8 +16,17 @@ This directory contains the source code for the Map Game application, including 
 ```
 src/
 ├── components/           # React components
+│   ├── Game.jsx         # Main game orchestration component
+│   ├── Game.css         # Game component styling
+│   ├── Map.jsx          # Google Maps display component
+│   ├── Map.css          # Map component styling
+│   ├── RouteInput.jsx   # Route description input component
+│   └── RouteInput.css   # Route input styling
 ├── hooks/               # Custom React hooks
+│   └── useGame.js       # Game state management hook
 ├── services/            # API and external services
+│   ├── maps.js          # Google Maps integration service
+│   └── scoring.js       # Route comparison and scoring service
 ├── utils/               # Pure utility functions
 ├── types/               # TypeScript type definitions
 ├── __tests__/           # Test utilities and mocks
@@ -44,6 +53,7 @@ src/
 - **Current Coverage**: 100% (32 passing tests)
 - **Coverage Reports**: Available in `coverage/` directory
 - **Coverage Types**: Statements, branches, functions, lines
+- **Last Updated**: December 2024 - Core features implementation complete
 
 ### Test Structure
 - **Unit Tests**: `*.test.jsx` files next to components

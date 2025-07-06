@@ -8,43 +8,45 @@ describe('App Component', () => {
     expect(titleElement).toBeInTheDocument()
   })
 
-  test('renders Hello World message', () => {
+  test('renders game loading state', () => {
     render(<App />)
-    const helloWorldElement = screen.getByText('Hello World! 🗺️')
-    expect(helloWorldElement).toBeInTheDocument()
+    const loadingElement = screen.getByText('Initializing game...')
+    expect(loadingElement).toBeInTheDocument()
   })
 
-  test('renders POC description', () => {
+  test('renders game container', () => {
     render(<App />)
-    const descriptionElement = screen.getByText('This is the proof of concept for the Blind Navigator map game.')
-    expect(descriptionElement).toBeInTheDocument()
-  })
-
-  test('renders Coming Soon section', () => {
-    render(<App />)
-    const comingSoonElement = screen.getByText('Coming Soon:')
-    expect(comingSoonElement).toBeInTheDocument()
-  })
-
-  test('renders feature list items', () => {
-    render(<App />)
-    
-    // Check that all feature items are present
-    expect(screen.getByText('Interactive map without street names')).toBeInTheDocument()
-    expect(screen.getByText('Route description interface')).toBeInTheDocument()
-    expect(screen.getByText('Route comparison with Google Maps')).toBeInTheDocument()
-    expect(screen.getByText('Scoring system')).toBeInTheDocument()
-  })
-
-  test('has correct structure with container div', () => {
-    render(<App />)
-    const container = document.querySelector('.container')
+    const container = document.querySelector('.game-container')
     expect(container).toBeInTheDocument()
   })
 
-  test('has features section with proper styling', () => {
+  test('has App wrapper with correct class', () => {
     render(<App />)
-    const featuresSection = document.querySelector('.features')
-    expect(featuresSection).toBeInTheDocument()
+    const appWrapper = document.querySelector('.App')
+    expect(appWrapper).toBeInTheDocument()
+  })
+
+  test('shows loading state when no API key provided', () => {
+    render(<App />)
+    
+    // Should show the loading state since no API key is provided
+    expect(screen.getByText('Map Game - Blind Navigator')).toBeInTheDocument()
+    expect(screen.getByText('Initializing game...')).toBeInTheDocument()
+  })
+
+  test('has proper heading structure', () => {
+    render(<App />)
+    const heading = screen.getByRole('heading', { level: 2 })
+    expect(heading).toHaveTextContent('Map Game - Blind Navigator')
+  })
+
+  test('renders Game component', () => {
+    render(<App />)
+    // Check that the game-specific content is present
+    const gameContainer = document.querySelector('.game-container')
+    expect(gameContainer).toBeInTheDocument()
+    
+    const gameLoading = document.querySelector('.game-loading')
+    expect(gameLoading).toBeInTheDocument()
   })
 }) 

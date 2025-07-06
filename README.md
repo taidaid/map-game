@@ -21,6 +21,24 @@ cd map-game
 # Install dependencies
 npm install
 
+# Set up environment variables
+cp .env.example .env
+# Edit .env and add your Google Maps API key
+```
+
+### Google Maps API Setup
+1. **Get API Key**: Visit [Google Cloud Console](https://console.cloud.google.com/)
+2. **Enable APIs**: Enable the following APIs for your project:
+   - Maps JavaScript API
+   - Directions API
+   - Places API (optional)
+3. **Configure Environment**: Add your API key to `.env`:
+   ```
+   VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+   ```
+
+### Start Development
+```bash
 # Start development server
 npm run dev
 ```
@@ -43,10 +61,12 @@ npm run test:ui      # Run tests with UI
 npm run test:coverage # Run tests with coverage report
 
 # E2E Testing
-npm run test:e2e     # Run all E2E tests
+npm run test:e2e     # Run all E2E tests (all browsers)
+npm run test:e2e:dev # Run E2E tests (Chromium only - fast)
 npm run test:e2e:ui  # Run E2E tests with interactive UI
 npm run test:e2e:headed # Run E2E tests in headed mode
-npm run test:all     # Run both unit and E2E tests
+npm run test:all     # Run both unit and E2E tests (all browsers)
+npm run test:all:dev # Run both unit and E2E tests (Chromium only)
 ```
 
 ## 🔒 Git Hooks & Documentation Enforcement
@@ -94,9 +114,10 @@ This ensures our documentation stays current with code changes and maintains our
 - [x] **Unit Testing Setup** - Vitest + React Testing Library configuration
 - [x] **Unit Test Coverage** - 100% coverage with 32 passing tests
 - [x] **E2E Testing Setup** - Playwright with cross-browser configuration
-- [x] **E2E Test Suite** - 102 passing tests across all browsers and devices
-- [x] **Test Utilities** - Page Object Model, test helpers, and fixtures
-- [x] **Test Scripts** - Complete test command suite with coverage reporting
+- [x] **E2E Test Suite** - 18 passing tests updated for game interface (50 total with unit tests)
+- [x] **Development Scripts** - Fast Chromium-only testing for development workflow
+- [x] **Test Utilities** - Updated Page Object Model, test helpers, and fixtures
+- [x] **Test Scripts** - Complete test command suite with development and CI options
 
 ### ✅ Documentation & Quality Assurance
 - [x] **Pre-commit README Enforcer** - Automatically requires README updates when code changes
@@ -113,11 +134,13 @@ This ensures our documentation stays current with code changes and maintains our
 - [x] **QA.md** - Comprehensive testing strategy and best practices
 - [x] **E2E Documentation** - Complete Playwright testing guide
 
-### 🔄 Core Features (In Progress)
-- [ ] **Google Maps Integration** - Maps JavaScript API setup and configuration
-- [ ] **Route Input Interface** - Text input component with format validation
-- [ ] **Basic Scoring System** - Simple route comparison and scoring logic
-- [ ] **Game State Management** - React hooks for game flow and state
+### ✅ Core Features (Completed)
+- [x] **Google Maps Integration** - Maps JavaScript API setup and configuration
+- [x] **Route Input Interface** - Text input component with format validation
+- [x] **Basic Scoring System** - Simple route comparison and scoring logic
+- [x] **Game State Management** - React hooks for game flow and state
+- [x] **Map Display Component** - Interactive map with custom styling and markers
+- [x] **Complete Game Flow** - End-to-end game experience with scoring and feedback
 
 ### 📅 POC Features (Planned)
 - [ ] **Map Display** - Google Maps embed without street labels
@@ -183,9 +206,14 @@ We maintain comprehensive test coverage with both unit tests and end-to-end test
 
 ### Quick Test Commands
 ```bash
+# Development workflow (fast)
 npm run test           # Unit tests
-npm run test:e2e       # E2E tests
-npm run test:all       # Both unit and E2E tests
+npm run test:e2e:dev   # E2E tests (Chromium only)
+npm run test:all:dev   # Both unit and E2E tests (Chromium only)
+
+# Comprehensive testing (CI/pre-release)
+npm run test:e2e       # E2E tests (all browsers)
+npm run test:all       # Both unit and E2E tests (all browsers)
 npm run test:coverage  # Coverage report
 ```
 

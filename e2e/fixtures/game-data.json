@@ -1,9 +1,15 @@
 {
   "expectedFeatures": [
-    "Interactive map without street names",
-    "Route description interface",
-    "Route comparison with Google Maps",
-    "Scoring system"
+    "Interactive map display",
+    "Route description input",
+    "Route comparison and scoring",
+    "Game progress tracking"
+  ],
+  "gameStates": [
+    "Study Map",
+    "Describe Route", 
+    "Calculating",
+    "Results"
   ],
   "sampleRoutes": [
     {
@@ -51,9 +57,14 @@
   },
   "pageElements": {
     "title": "Map Game - Blind Navigator",
-    "helloWorldText": "Hello World! 🗺️",
-    "descriptionText": "This is the proof of concept for the Blind Navigator map game.",
-    "comingSoonText": "Coming Soon:"
+    "subtitle": "Navigate using visual landmarks without street names!",
+    "loadingMessage": "Initializing game...",
+    "gameSteps": {
+      "step1": "1. Study Map",
+      "step2": "2. Describe Route",
+      "step3": "3. Calculating", 
+      "step4": "4. Results"
+    }
   },
   "mockGameScenarios": [
     {
