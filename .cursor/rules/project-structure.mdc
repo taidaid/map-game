@@ -1,0 +1,82 @@
+---
+alwaysApply: true
+---
+filters:
+  - type: file_extension
+    pattern: "\\.(js|jsx|ts|tsx|json|md|css)$"
+  - type: event
+    pattern: "file_create|directory_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 📁 Project Structure & Development Conventions
+
+      ### Established Directory Structure:
+      ```
+      map-game/
+      ├── src/                    # Source code
+      │   ├── components/         # React components
+      │   ├── hooks/             # Custom React hooks
+      │   ├── services/          # API and external services
+      │   ├── utils/             # Pure utility functions
+      │   ├── types/             # TypeScript type definitions
+      │   └── __tests__/         # Test utilities and mocks
+      ├── e2e/                   # End-to-end tests
+      │   ├── tests/             # E2E test files
+      │   ├── page-objects/      # Page Object Model classes
+      │   ├── fixtures/          # Test data
+      │   └── utils/             # E2E test utilities
+      ├── .cursor/rules/         # Cursor rules (THIS DIRECTORY)
+      └── docs/                  # Documentation files
+      ```
+
+      ### File Naming Conventions:
+      - **Components**: PascalCase `ComponentName.jsx`
+      - **Hooks**: camelCase `useHookName.js`
+      - **Services**: camelCase `serviceName.js`
+      - **Utils**: camelCase `utilityName.js`
+      - **Tests**: `[filename].test.js` or `[filename].spec.js`
+      - **Types**: camelCase `typeName.ts`
+
+      ### Development Workflow:
+      1. **Start with tests** - understand what you're building
+      2. **Follow TDD** - write tests before implementation
+      3. **Use established patterns** - follow existing code structure
+      4. **Update documentation** - keep progress tracking current
+      5. **Run validation** - ensure all automated checks pass
+
+      ### Integration Points:
+      - **Google Maps**: Use `src/services/maps.js` abstraction
+      - **Game Logic**: Centralize in `src/services/game.js`
+      - **State Management**: Use React hooks in `src/hooks/`
+      - **UI Components**: Build reusable components in `src/components/`
+
+      ### Migration-Friendly Structure:
+      - **Services layer** - abstracts external dependencies
+      - **Hooks** - isolates state management logic
+      - **Utils** - pure functions for easy testing
+      - **Types** - TypeScript definitions for contracts
+
+      ### Quality Assurance:
+      - **Unit Tests**: 100% coverage on application code
+      - **E2E Tests**: Complete user journey coverage
+      - **Documentation**: Keep all 4 docs updated
+      - **Progress Tracking**: Update checklists with each feature
+
+      ### Conventions to Follow:
+      - ✅ **Consistent imports** - use absolute paths where possible
+      - ✅ **Proper exports** - default exports for main components
+      - ✅ **Clear naming** - descriptive and consistent naming
+      - ✅ **Separation of concerns** - UI, logic, and data layers
+      - ✅ **Test colocation** - tests near source code
+
+examples:
+  - input: "Creating new component for route input"
+    output: "Place in src/components/RouteInput/, add tests, update docs"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "project-structure"
+</rule>

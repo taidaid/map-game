@@ -1,0 +1,93 @@
+---
+alwaysApply: true
+---
+filters:
+  - type: file_extension
+    pattern: "\\.(js|jsx|ts|tsx|json|md)$"
+  - type: event
+    pattern: "file_save|file_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 🔄 Complete Development Workflow
+
+      ### 1. Pre-Development Phase
+      ```bash
+      # Ensure clean starting state
+      npm run test:all        # Verify all tests pass
+      npm run lint           # Check code quality
+      git status            # Ensure clean working directory
+      ```
+
+      ### 2. Feature Development Workflow
+      1. **Plan**: Review documentation and identify what needs to be built
+      2. **Update Progress**: Mark feature as "in progress" in documentation
+      3. **Write Tests**: Start with failing tests that describe desired behavior
+      4. **Implement**: Write minimal code to make tests pass
+      5. **Refactor**: Improve code while keeping tests green
+      6. **Validate**: Run all automated checks
+      7. **Document**: Update progress and add examples
+
+      ### 3. Self-Correcting Feedback Loop
+      ```bash
+      # Continuous validation during development
+      npm run test:watch     # Unit tests with hot reload
+      npm run lint          # Code quality checks
+      npx tsc --noEmit      # TypeScript validation
+      ```
+
+      ### 4. Quality Gates (Must Pass)
+      - ✅ **All Tests Pass**: 134+ tests (32 unit + 102 E2E)
+      - ✅ **100% Coverage**: On application code
+      - ✅ **No Lint Errors**: ESLint compliance
+      - ✅ **TypeScript Clean**: No compilation errors
+      - ✅ **Documentation Updated**: Progress tracking current
+
+      ### 5. Feature Completion Checklist
+      - [ ] **Tests Written**: Unit tests for logic, E2E tests for user flows
+      - [ ] **Code Quality**: ESLint and TypeScript compliance
+      - [ ] **Documentation**: Progress updated in all relevant docs
+      - [ ] **Examples**: Usage examples added where applicable
+      - [ ] **Validation**: All automated checks passing
+      - [ ] **Progress Tracking**: Moved from "in progress" to "completed"
+
+      ### 6. Integration Strategy
+      - **Google Maps**: Abstract through services layer
+      - **State Management**: Use React hooks pattern
+      - **Testing**: Test-driven development approach
+      - **Documentation**: Keep all 4 docs synchronized
+
+      ### 7. Migration-Ready Development
+      - **Services Layer**: Abstracts external dependencies
+      - **Clean Architecture**: Separation of concerns
+      - **Type Safety**: TypeScript interfaces and types
+      - **Testability**: Pure functions and dependency injection
+
+      ### 8. Automation & Tooling
+      ```bash
+      # Available development commands
+      npm run dev          # Development server
+      npm run test         # Unit tests
+      npm run test:e2e     # E2E tests
+      npm run test:all     # Both unit and E2E tests
+      npm run lint         # Code quality
+      npm run build        # Production build
+      ```
+
+      ### 9. Best Practices
+      - **Fail Fast**: Use automated tools to catch issues early
+      - **Continuous Feedback**: Run tests during development
+      - **Clean Code**: Follow established patterns and conventions
+      - **Documentation**: Keep documentation current with code
+      - **Progressive Enhancement**: Build features incrementally
+
+examples:
+  - input: "Starting work on Google Maps integration"
+    output: "Update docs to 'in progress', write tests first, implement with validation"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "workflow"
+</rule>

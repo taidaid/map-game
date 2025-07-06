@@ -1,0 +1,74 @@
+# Automated Validation & Self-Correcting Feedback Loop
+
+This rule ensures code quality through automated tooling and prevents regressions through comprehensive testing.
+
+<rule>
+name: automated_validation_feedback_loop
+description: Enforce automated validation and self-correcting feedback through tooling
+filters:
+  - type: file_extension
+    pattern: "\\.(js|jsx|ts|tsx|json|md)$"
+  - type: event
+    pattern: "file_save|file_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 🔄 Self-Correcting Feedback Loop
+
+      ### Before Making Changes:
+      1. **Run existing tests** to ensure current state is stable:
+         ```bash
+         npm run test        # Unit tests
+         npm run test:e2e    # E2E tests
+         ```
+
+      ### During Development:
+      2. **Use TypeScript compiler** for immediate feedback:
+         ```bash
+         npx tsc --noEmit    # Type checking without compilation
+         ```
+
+      3. **Run ESLint** for code quality:
+         ```bash
+         npm run lint        # Check for linting issues
+         ```
+
+      4. **Run tests in watch mode** for continuous validation:
+         ```bash
+         npm run test:watch  # Unit tests with hot reload
+         ```
+
+      ### After Changes:
+      5. **Validate all changes** before considering complete:
+         ```bash
+         npm run test:all    # Run both unit and E2E tests
+         npm run test:coverage # Ensure coverage remains high
+         ```
+
+      6. **Fix any failing tests immediately** - never leave broken tests
+      7. **Update tests** if functionality changes
+      8. **Add tests** for new functionality
+
+      ### Automated Quality Gates:
+      - ✅ **TypeScript**: No compilation errors
+      - ✅ **ESLint**: No linting violations
+      - ✅ **Unit Tests**: All 32+ tests passing
+      - ✅ **E2E Tests**: All 102+ tests passing
+      - ✅ **Coverage**: Maintain 100% on application code
+
+      ### Self-Correcting Principles:
+      - **Fail Fast**: Automated tools catch issues immediately
+      - **Continuous Feedback**: Tests run during development
+      - **Deterministic**: Same input always produces same output
+      - **Comprehensive**: Multiple layers of validation
+
+examples:
+  - input: "Making changes to components or utilities"
+    output: "Run tests first, develop with watch mode, validate all changes"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "development-workflow"
+</rule>

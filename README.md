@@ -49,6 +49,37 @@ npm run test:e2e:headed # Run E2E tests in headed mode
 npm run test:all     # Run both unit and E2E tests
 ```
 
+## 🔒 Git Hooks & Documentation Enforcement
+
+### Pre-commit README Enforcer
+We use a pre-commit hook that automatically enforces documentation updates:
+
+**How it works:**
+- When you commit code changes, the hook checks for updates to relevant README files
+- If you change code files, you **must** also update the nearest README file
+- The commit will fail if documentation is not updated
+
+**Example workflow:**
+```bash
+# ❌ This will fail - no README update
+git add src/components/Button.jsx
+git commit -m "Add button component"
+# Hook says: "README update required!"
+
+# ✅ This will succeed - README also updated
+git add README.md  # Update documentation
+git commit -m "Add button component and update docs"
+# Hook says: "README update requirement satisfied!"
+```
+
+**What counts as a README update:**
+- Adding documentation about your changes
+- Updating progress checklists
+- Adding timestamps or version info
+- Even minor formatting changes (if you've reviewed the docs)
+
+This ensures our documentation stays current with code changes and maintains our comprehensive development tracking.
+
 ## 📋 Development Progress
 
 ### ✅ Foundation & Setup
@@ -66,6 +97,14 @@ npm run test:all     # Run both unit and E2E tests
 - [x] **E2E Test Suite** - 102 passing tests across all browsers and devices
 - [x] **Test Utilities** - Page Object Model, test helpers, and fixtures
 - [x] **Test Scripts** - Complete test command suite with coverage reporting
+
+### ✅ Documentation & Quality Assurance
+- [x] **Pre-commit README Enforcer** - Automatically requires README updates when code changes
+- [x] **Cursor Rules** - 6 comprehensive rules implementing self-correcting feedback loop
+- [x] **Git Hooks** - Husky integration for automated documentation enforcement
+- [x] **Quality Gates** - TypeScript, ESLint, testing, and documentation validation
+- [x] **Documentation Standards** - Consistent formatting and progress tracking
+- [x] **Development Workflow** - Complete workflow with automated validation
 
 ### ✅ Documentation
 - [x] **README.md** - Developer-focused setup and usage guide
@@ -148,4 +187,4 @@ npm run test:coverage  # Coverage report
 - **Backend API** - Route processing and scoring
 - **Database** - User progress and leaderboards
 
-Pre-commit README enforcer installed: Sun Jul  6 13:35:33 CEST 2025
+

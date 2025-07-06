@@ -1,0 +1,78 @@
+{
+  "expectedFeatures": [
+    "Interactive map without street names",
+    "Route description interface",
+    "Route comparison with Google Maps",
+    "Scoring system"
+  ],
+  "sampleRoutes": [
+    {
+      "description": "Go north on Main Street. Turn right on Oak Avenue.",
+      "isValid": true
+    },
+    {
+      "description": "Go south on First Street. Turn left on Second Avenue. Turn right on Third Street.",
+      "isValid": true
+    },
+    {
+      "description": "invalid route format",
+      "isValid": false
+    },
+    {
+      "description": "",
+      "isValid": false
+    }
+  ],
+  "testCoordinates": {
+    "utrecht": {
+      "startPoint": {
+        "lat": 52.0907,
+        "lng": 5.1214,
+        "name": "Utrecht Central Station"
+      },
+      "endPoint": {
+        "lat": 52.0799,
+        "lng": 5.1265,
+        "name": "Utrecht University"
+      }
+    },
+    "amsterdam": {
+      "startPoint": {
+        "lat": 52.3676,
+        "lng": 4.9041,
+        "name": "Amsterdam Central Station"
+      },
+      "endPoint": {
+        "lat": 52.3740,
+        "lng": 4.8897,
+        "name": "Anne Frank House"
+      }
+    }
+  },
+  "pageElements": {
+    "title": "Map Game - Blind Navigator",
+    "helloWorldText": "Hello World! 🗺️",
+    "descriptionText": "This is the proof of concept for the Blind Navigator map game.",
+    "comingSoonText": "Coming Soon:"
+  },
+  "mockGameScenarios": [
+    {
+      "name": "Perfect Route Match",
+      "userRoute": "Go north on Main Street. Turn right on Oak Avenue.",
+      "googleRoute": "Go north on Main Street. Turn right on Oak Avenue.",
+      "expectedScore": 100
+    },
+    {
+      "name": "Partial Route Match",
+      "userRoute": "Go north on Main Street. Turn right on Oak Avenue.",
+      "googleRoute": "Go north on Main Street. Turn left on Elm Street.",
+      "expectedScore": 75
+    },
+    {
+      "name": "No Route Match",
+      "userRoute": "Go south on First Street.",
+      "googleRoute": "Go north on Main Street. Turn right on Oak Avenue.",
+      "expectedScore": 25
+    }
+  ]
+} 

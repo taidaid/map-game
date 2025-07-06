@@ -1,0 +1,84 @@
+---
+globs: *.ts,*.tsx,*.js,*.jsx
+alwaysApply: false
+---
+filters:
+  - type: file_extension
+    pattern: "\\.(js|jsx|ts|tsx)$"
+  - type: event
+    pattern: "file_save|file_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 🔧 Code Quality & TypeScript Standards
+
+      ### Before Writing Code:
+      1. **Plan the structure** following established patterns:
+         ```
+         src/
+         ├── components/     # React components
+         ├── hooks/         # Custom hooks
+         ├── services/      # API and external services
+         ├── utils/         # Pure utility functions
+         └── types/         # TypeScript type definitions
+         ```
+
+      ### During Development:
+      2. **Follow TypeScript best practices**:
+         - Use explicit types for function parameters and return values
+         - Define interfaces for props and complex objects
+         - Use type guards for runtime type checking
+         - Avoid `any` type - use specific types or generics
+
+      3. **Follow React conventions**:
+         - Use functional components with hooks
+         - Implement proper prop types
+         - Use descriptive component and hook names
+         - Separate concerns (UI, logic, data)
+
+      ### Code Quality Standards:
+      4. **ESLint compliance**:
+         ```bash
+         npm run lint  # Must pass without warnings
+         ```
+
+      5. **TypeScript compilation**:
+         ```bash
+         npx tsc --noEmit  # Must compile without errors
+         ```
+
+      6. **Testing requirements**:
+         - Add unit tests for all new utilities
+         - Add component tests for all new components
+         - Update E2E tests for user-facing features
+         - Maintain 100% coverage on application code
+
+      ### File Organization:
+      - **Components**: `src/components/[ComponentName]/[ComponentName].jsx`
+      - **Hooks**: `src/hooks/use[HookName].js`
+      - **Services**: `src/services/[serviceName].js`
+      - **Utils**: `src/utils/[utilityName].js`
+      - **Types**: `src/types/[typeName].ts`
+
+      ### Testing Requirements:
+      - **Unit Tests**: `[filename].test.js` alongside source files
+      - **E2E Tests**: `e2e/tests/[feature].spec.js`
+      - **Test Coverage**: Must maintain 100% on application code
+
+      ### Quality Gates:
+      - ✅ **TypeScript**: No compilation errors
+      - ✅ **ESLint**: No linting violations
+      - ✅ **Tests**: All tests passing
+      - ✅ **Coverage**: 100% on new code
+      - ✅ **Structure**: Follows established patterns
+
+examples:
+  - input: "Adding new utility function"
+    output: "Place in src/utils/, add TypeScript types, write unit tests"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "code-quality"
+</rule>

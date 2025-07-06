@@ -1,0 +1,66 @@
+---
+alwaysApply: true
+---
+filters:
+  - type: file_extension
+    pattern: "\\.(js|jsx|ts|tsx|md)$"
+  - type: event
+    pattern: "file_save|file_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 📚 Documentation & Progress Tracking
+
+      ### When Adding New Features:
+      1. **Update progress checklists** in relevant documentation:
+         - **README.md**: Development progress section
+         - **ARCHITECTURE.md**: Implementation progress section
+         - **PRODUCT.md**: Product development progress section
+         - **QA.md**: Testing implementation progress section
+
+      2. **Move checklist items** from planned to in-progress to completed:
+         ```markdown
+         # Before
+         - [ ] **Feature Name** - Description
+         
+         # In Progress
+         - [x] **Feature Name** - Description (Status: In Progress)
+         
+         # Completed
+         - [x] **Feature Name** - Description
+         ```
+
+      ### Documentation Standards:
+      3. **Keep documentation current** - update with every significant change
+      4. **Use consistent formatting** - follow established patterns
+      5. **Include examples** - show how to use new features
+      6. **Update scripts** - add new npm commands when applicable
+
+      ### Progress Tracking Rules:
+      - **Mark as in-progress** when you start working on a feature
+      - **Mark as completed** when feature is fully implemented and tested
+      - **Update multiple docs** if feature spans multiple areas
+      - **Add new checklist items** for unplanned work
+
+      ### Documentation Files to Update:
+      - **README.md**: Development status, scripts, quick start
+      - **ARCHITECTURE.md**: Technical implementation details
+      - **PRODUCT.md**: Product features and user experience
+      - **QA.md**: Testing coverage and validation
+
+      ### Quality Standards:
+      - ✅ **Accuracy**: Documentation matches actual implementation
+      - ✅ **Completeness**: All features are documented
+      - ✅ **Consistency**: Same format across all documents
+      - ✅ **Clarity**: Easy to understand and follow
+
+examples:
+  - input: "Implementing Google Maps integration"
+    output: "Update README.md progress, ARCHITECTURE.md implementation, add examples"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "documentation"
+</rule>
