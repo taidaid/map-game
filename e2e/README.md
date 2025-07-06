@@ -5,11 +5,11 @@
 This directory contains end-to-end (E2E) tests for the Map Game application using Playwright. The tests verify the complete application behavior from a user's perspective across multiple browsers.
 
 > **📚 Related Documentation:**
-> - **[../README.md](../README.md)** - Project overview, quick start, and development progress
-> - **[../src/README.md](../src/README.md)** - Unit testing with Vitest & React Testing Library
-> - **[../QA.md](../QA.md)** - Overall testing strategy and quality assurance
-> - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and technology stack
-> - **[../PRODUCT.md](../PRODUCT.md)** - Product vision, features, and user experience
+> - **[../README.md](../README.md)** - Project overview, development scripts, and setup
+> - **[../QA.md](../QA.md)** - Testing strategy and quality assurance
+> - **[../src/README.md](../src/README.md)** - Unit testing specifics
+> - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and project structure
+> - **[../PRODUCT.md](../PRODUCT.md)** - Product vision and features
 
 ## Directory Structure
 
@@ -29,6 +29,9 @@ e2e/
 
 ## Available Scripts
 
+For complete testing commands and scripts, see **[../README.md](../README.md#development-scripts)**.
+
+**Quick E2E testing commands:**
 ```bash
 # Development workflow (fast)
 npm run test:e2e:dev      # Run E2E tests (Chromium only)
@@ -41,13 +44,12 @@ npm run test:all          # Run both unit and E2E tests (all browsers)
 # Interactive and debug modes
 npm run test:e2e:ui       # Run tests with UI mode (interactive)
 npm run test:e2e:headed   # Run tests in headed mode (see browser)
-npm run test:e2e:debug    # Run tests with debug mode
 ```
 
 **Development vs Comprehensive Testing:**
 - **Development**: Use `:dev` scripts for fast feedback (Chromium only)
-- **CI/Pre-release**: Use full scripts for complete browser coverage (7 configurations)
-- **Browser coverage**: Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari, Chromium
+- **CI/Pre-release**: Use full scripts for complete browser coverage
+- **Browser coverage**: Chrome, Firefox, Safari, Edge, Mobile Chrome, Mobile Safari
 
 ## Test Categories
 
@@ -69,10 +71,7 @@ Tests run on:
 - ✅ **Desktop**: Chrome, Firefox, Safari, Edge
 - ✅ **Mobile**: Mobile Chrome, Mobile Safari
 
-### Test Coverage
-- **Total Tests**: 102 passing tests across all browsers and devices
-- **Cross-Browser**: Consistent results across all supported browsers
-- **Mobile Testing**: Responsive design validation on mobile viewports
+For comprehensive test coverage information, see **[../QA.md](../QA.md#test-coverage)**.
 
 ## Key Features
 
@@ -224,7 +223,6 @@ When adding new tests:
 
 ## 🔗 Next Steps
 
-- **[../src/README.md](../src/README.md)** - Learn about unit testing approach
-- **[../QA.md](../QA.md)** - Explore comprehensive testing strategy  
-- **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Understand technical architecture
-- **[../README.md](../README.md)** - Return to project overview 
+- **[../src/README.md](../src/README.md)** - Unit testing specifics
+- **[../QA.md](../QA.md)** - Overall testing strategy and standards
+- **[../README.md](../README.md)** - Development scripts and project setup 

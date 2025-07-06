@@ -1,0 +1,131 @@
+---
+alwaysApply: false
+description: Ensure documentation knowledge exists in only one place with cross-references to avoid duplication
+---
+# Documentation Consolidation
+
+Prevent duplicate knowledge across documentation files by ensuring information exists in only one authoritative location.
+
+<rule>
+name: documentation_consolidation
+description: Ensure documentation knowledge exists in only one place with cross-references to avoid duplication
+filters:
+  - type: file_extension
+    pattern: "\\.md$"
+  - type: event
+    pattern: "file_save|file_create"
+
+actions:
+  - type: suggest
+    message: |
+      ## 📚 Documentation Consolidation Standards
+
+      ### Single Source of Truth Principle
+      Each type of information should exist in **only one authoritative document**. Other documents should **link to** that information rather than duplicating it.
+
+      ### Documentation Authority Map
+      ```
+      README.md               # Project overview, quick start, development scripts
+      ├── ARCHITECTURE.md     # Technical architecture, project structure, tech stack
+      ├── PRODUCT.md         # Product vision, features, user experience
+      ├── QA.md              # Testing strategy overview
+      ├── src/README.md      # Unit testing specifics
+      └── e2e/README.md      # E2E testing specifics
+      ```
+
+      ### Information Ownership
+      **README.md** (Main entry point):
+      - ✅ Project overview and quick start
+      - ✅ Development scripts (npm run commands)
+      - ✅ Environment setup (Google Maps API, etc.)
+      - ✅ Overall development progress
+      - ✅ Git hooks and documentation enforcement
+
+      **ARCHITECTURE.md** (Technical authority):
+      - ✅ Technology stack and framework choices
+      - ✅ Project directory structure
+      - ✅ Migration strategy and backend planning
+      - ✅ Technical implementation progress
+
+      **PRODUCT.md** (Product authority):
+      - ✅ Product vision and game concept
+      - ✅ Feature specifications
+      - ✅ User experience and game flow
+      - ✅ Product development progress
+
+      **QA.md** (Testing strategy authority):
+      - ✅ Overall testing philosophy and strategy
+      - ✅ Test pyramid and coverage standards
+      - ✅ Quality gates and validation process
+
+      **src/README.md** (Unit testing specifics):
+      - ✅ Unit testing details, examples, and best practices
+      - ✅ Vitest and React Testing Library specifics
+      - ✅ Mock strategies and test utilities
+
+      **e2e/README.md** (E2E testing specifics):
+      - ✅ Playwright setup and configuration
+      - ✅ E2E test scripts and browser coverage
+      - ✅ Page Object Model and test utilities
+
+      ### Anti-Patterns to Avoid
+      ❌ **Duplicate Scripts**: Don't repeat npm commands in multiple files
+      ❌ **Duplicate Progress**: Don't maintain separate progress lists
+      ❌ **Duplicate Structure**: Don't repeat directory structures
+      ❌ **Duplicate Setup**: Don't repeat installation instructions
+      ❌ **Duplicate Tech Stack**: Don't repeat technology choices
+
+      ### Consolidation Actions
+      **Instead of duplicating, use cross-references:**
+      ```markdown
+      # ✅ Good: Cross-reference
+      For development scripts, see [README.md](./README.md#development-scripts)
+
+      # ❌ Bad: Duplicate information
+      ```bash
+      npm run dev          # Start development server
+      npm run build        # Build for production
+      ```
+
+      ### When Adding New Information
+      1. **Identify the authoritative document** for this type of information
+      2. **Add the information there** with proper sectioning
+      3. **Link from other documents** if they need to reference it
+      4. **Update the "Related Documentation" sections** to point to new content
+
+      ### Cross-Reference Format
+      ```markdown
+      > **📚 Related Documentation:**
+      > - **[README.md](./README.md)** - Project overview and development scripts
+      > - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - Technical architecture
+      > - **[PRODUCT.md](./PRODUCT.md)** - Product vision and features
+      ```
+
+      ### Validation Questions
+      Before adding content to any documentation file, ask:
+      - Does this information already exist somewhere else?
+      - Which document is the most authoritative place for this?
+      - Should I link to existing information instead?
+      - Am I creating unnecessary duplication?
+
+      ### Documentation Maintenance
+      - **Regular audits** - Check for duplicate information
+      - **Link validation** - Ensure cross-references are accurate
+      - **Content ownership** - Each section should have a clear owner
+      - **Update coordination** - Changes to authoritative docs should trigger related doc updates
+
+examples:
+  - input: "Adding npm scripts to multiple README files"
+    output: "Add to main README.md, link from others"
+  - input: "Documenting testing strategy in every file"
+    output: "Document in QA.md, reference from others"
+
+metadata:
+  priority: high
+  version: 1.0
+  category: "documentation"
+</rule>
+description:
+globs:
+alwaysApply: false
+---

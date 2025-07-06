@@ -5,11 +5,11 @@
 This directory contains the source code for the Map Game application, including React components, utilities, services, and comprehensive unit tests.
 
 > **📚 Related Documentation:**
-> - **[../README.md](../README.md)** - Project overview, quick start, and development progress
-> - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and technology stack
-> - **[../QA.md](../QA.md)** - Overall testing strategy and quality assurance
-> - **[../e2e/README.md](../e2e/README.md)** - End-to-end testing with Playwright
-> - **[../PRODUCT.md](../PRODUCT.md)** - Product vision, features, and user experience
+> - **[../README.md](../README.md)** - Project overview, development scripts, and setup
+> - **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Technical architecture and project structure
+> - **[../QA.md](../QA.md)** - Testing strategy and quality assurance
+> - **[../e2e/README.md](../e2e/README.md)** - End-to-end testing specifics
+> - **[../PRODUCT.md](../PRODUCT.md)** - Product vision and features
 
 ## Directory Structure
 
@@ -48,39 +48,15 @@ src/
 - **Mock Functions**: vi.mock() and vi.fn()
 - **Test Environment**: jsdom
 
-### Coverage Standards
-- **Target Coverage**: 100% on application code
-- **Current Coverage**: 100% (32 passing tests)
-- **Coverage Reports**: Available in `coverage/` directory
-- **Coverage Types**: Statements, branches, functions, lines
-- **Last Updated**: December 2024 - Core features implementation complete
-
-### Test Structure
-- **Unit Tests**: `*.test.jsx` files next to components
-- **Integration Tests**: `__tests__/integration/` directory
-- **Mocks**: `__tests__/mocks/` directory
-- **Test Utilities**: `utils/testUtils.js`
-
 ### Running Tests
 
+For complete testing commands and scripts, see **[../README.md](../README.md#development-scripts)**.
+
+**Quick unit testing commands:**
 ```bash
-# Run all unit tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with UI
-npm run test:ui
-
-# Run tests with coverage
-npm run test:coverage
-
-# Run specific test file
-npm run test -- Button.test.jsx
-
-# Run tests matching pattern
-npm run test -- --grep "Button"
+npm run test         # Run unit tests
+npm run test:watch   # Run tests in watch mode
+npm run test:coverage # Run tests with coverage
 ```
 
 ### Test Configuration
@@ -212,6 +188,8 @@ export const mockGoogleMaps = {
 
 ### Coverage Reports
 
+For comprehensive coverage information and standards, see **[../QA.md](../QA.md#coverage-standards)**.
+
 Coverage reports are generated in multiple formats:
 - **HTML**: `coverage/index.html` - Interactive browser report
 - **JSON**: `coverage/coverage-final.json` - Machine-readable format
@@ -250,7 +228,6 @@ As the application grows, consider:
 
 ## 🔗 Next Steps
 
-- **[../e2e/README.md](../e2e/README.md)** - Learn about end-to-end testing approach
-- **[../QA.md](../QA.md)** - Explore comprehensive testing strategy
-- **[../ARCHITECTURE.md](../ARCHITECTURE.md)** - Understand technical architecture
-- **[../README.md](../README.md)** - Return to project overview 
+- **[../e2e/README.md](../e2e/README.md)** - End-to-end testing with Playwright
+- **[../QA.md](../QA.md)** - Overall testing strategy and standards
+- **[../README.md](../README.md)** - Development scripts and project setup 
