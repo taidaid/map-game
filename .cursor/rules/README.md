@@ -8,9 +8,10 @@ This directory contains comprehensive cursor rules that implement a self-correct
 **Purpose**: Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes
 
 **Key Features**:
+- Manual commit creation (no interactive tools)
 - Single purpose principle enforcement
 - Atomic commit size guidelines (1-3 files, <50 lines)
-- Conventional commit format examples
+- Conventional commit format requirements
 - Change breakdown strategies
 - Integration with testing workflow
 
@@ -160,7 +161,7 @@ As the project evolves, these rules can be extended to include:
 
 **2024-12-19**: 
 - **Atomic Commits**: Added `atomic-commits.mdc` rule to encourage minimal, focused commits with single-purpose changes and conventional commit format.
-- **Commitizen Integration**: Installed and configured Commitizen (`npm run commit`) for interactive, standardized commit message creation.
+- **Manual Commit Creation**: Updated atomic-commits rule to require manual commit creation using `git commit -m "message"` format instead of interactive tools, while maintaining conventional commit standards.
 - **Documentation Consolidation**: Implemented comprehensive documentation consolidation to eliminate duplicate knowledge across all documentation files. Added `documentation-consolidation.mdc` rule to prevent future duplication.
 - **Single Source of Truth**: Established clear authority map where each type of information exists in only one authoritative document with cross-references instead of duplication.
 - **Enhanced Navigation**: All documentation now includes Related Documentation sections and Next Steps navigation to minimize context switching during development.

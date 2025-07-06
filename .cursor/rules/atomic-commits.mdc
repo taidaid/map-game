@@ -1,8 +1,3 @@
----
-alwaysApply: true
-description: Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes.
----
-
 # Atomic Commits
 
 Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes.
@@ -24,6 +19,36 @@ actions:
       ### Single Purpose Principle
       Each commit should accomplish **one specific goal** with the minimal changes necessary. If you can't describe your commit in a single, clear sentence, it's probably too large.
 
+      ### Manual Commit Creation (No Interactive Tools)
+      **IMPORTANT**: Always create commits manually using `git commit -m "message"` format.
+      - **DO NOT** use interactive commit tools like `npm run commit` or `git cz`
+      - **DO** manually craft commit messages following conventional commit format
+      - **DO** ensure commit messages are clear and descriptive
+
+      ### Conventional Commit Format
+      All commits must follow this exact format:
+      ```
+      <type>(<scope>): <subject>
+      
+      <body>
+      
+      <footer>
+      ```
+
+      **Required Elements:**
+      - **type**: One of feat, fix, docs, style, refactor, test, chore
+      - **subject**: Clear, concise description (50 characters max)
+      - **body**: Optional detailed explanation (72 characters per line)
+      - **footer**: Optional breaking changes or issue references
+
+      **Examples:**
+      ```bash
+      git commit -m "feat: add route input validation"
+      git commit -m "fix: correct map marker positioning"
+      git commit -m "docs: update installation instructions"
+      git commit -m "test: add unit tests for scoring service"
+      ```
+
       ### Atomic Commit Checklist
       Before committing, ask yourself:
       - [ ] **Single Purpose**: Does this commit do exactly one thing?
@@ -31,6 +56,7 @@ actions:
       - [ ] **Self-Contained**: Could this commit be safely reverted without breaking other features?
       - [ ] **Testable**: Can I test this specific change in isolation?
       - [ ] **Clear Message**: Can I describe this change in one clear sentence?
+      - [ ] **Manual Creation**: Am I creating this commit manually with proper format?
 
       ### What Makes a Good Atomic Commit
       
@@ -154,15 +180,46 @@ actions:
       - Run tests to ensure no regressions
       - Test the change in isolation if possible
 
-      **4. Commit with Clear Message**
-      - Use conventional commit format
-      - Describe exactly what changed
+      **4. Commit Manually with Clear Message**
+      - Use `git commit -m "type: clear description"` format
+      - Follow conventional commit format exactly
       - Keep message concise and specific
+      - **Never** use interactive commit tools
 
       **5. Move to Next Atomic Change**
       - Resist the urge to bundle changes
       - Each commit should stand alone
       - Build features incrementally
+
+      ### Manual Commit Examples for Our Project
+
+      **Component Development:**
+      ```bash
+      git commit -m "feat: add Map component with basic Google Maps display"
+      git commit -m "feat: add RouteInput component with text validation"
+      git commit -m "style: fix ESLint warnings in Map component"
+      ```
+
+      **Service Implementation:**
+      ```bash
+      git commit -m "feat: implement route scoring algorithm in scoring service"
+      git commit -m "refactor: extract map utilities to separate service"
+      git commit -m "fix: correct distance calculation in scoring service"
+      ```
+
+      **Testing:**
+      ```bash
+      git commit -m "test: add unit tests for Map component"
+      git commit -m "test: add E2E tests for route input flow"
+      git commit -m "fix: resolve failing test in scoring service"
+      ```
+
+      **Documentation:**
+      ```bash
+      git commit -m "docs: update QA.md with new testing patterns"
+      git commit -m "docs: add API documentation for maps service"
+      git commit -m "docs: update README with development progress"
+      ```
 
       ### Working with Our Codebase
 
@@ -171,17 +228,6 @@ actions:
       - **Services**: Isolated business logic (`src/services/`)
       - **Tests**: Co-located with source files
       - **Documentation**: Separate files for different concerns
-
-      **Good Atomic Patterns for Our Project:**
-      ```
-      feat: add Map component with basic Google Maps display
-      feat: add RouteInput component with text validation
-      feat: implement route scoring algorithm in scoring service
-      test: add unit tests for Map component
-      test: add E2E tests for route input flow
-      fix: correct map marker positioning bug
-      docs: update QA.md with new testing patterns
-      ```
 
       ### Benefits of Atomic Commits
       - **Easier Reviews**: Small, focused changes are easier to understand
@@ -197,15 +243,34 @@ actions:
       - Clear commit purpose = clear documentation updates
       - Independent changes = independent documentation sections
 
+      ### Commit Message Standards
+      **Format Requirements:**
+      - Start with lowercase type (feat, fix, docs, etc.)
+      - Use imperative mood ("add" not "adds" or "added")
+      - No period at the end of subject line
+      - Keep subject line under 50 characters
+      - Reference issues with "fixes #123" or "closes #123"
+
+      **Quality Checklist:**
+      - [ ] Follows conventional commit format
+      - [ ] Created manually (not with interactive tools)
+      - [ ] Single purpose and minimal changes
+      - [ ] Clear, descriptive message
+      - [ ] All tests pass before committing
+
 examples:
   - input: "Adding complete Google Maps integration with UI and scoring"
-    output: "Break into: 1) Add Maps API service, 2) Add Map component, 3) Add scoring logic, 4) Add tests"
+    output: "Break into: 1) feat: add Google Maps API service, 2) feat: create Map component, 3) feat: add scoring logic, 4) test: add comprehensive tests"
   - input: "Fixing multiple bugs and adding new feature"
-    output: "Separate into individual commits: one per bug fix, one for feature"
+    output: "Separate into individual commits: fix: resolve marker positioning, fix: correct route validation, feat: add new feature"
 
 metadata:
   priority: high
-  version: 1.0
+  version: 1.1
+  category: "development-workflow"
+</rule>
+
+
   category: "development-workflow"
 </rule>
 
