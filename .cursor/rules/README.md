@@ -24,6 +24,15 @@ This directory contains comprehensive cursor rules that implement a self-correct
 - Single source of truth principle
 - Automated consolidation guidance
 
+### 🔄 [`atomic-commits.mdc`](./atomic-commits.mdc)
+**Purpose**: Encourages minimal, focused commits that accomplish one specific goal with clear, testable changes
+
+**Key Features**:
+- Single-purpose commit enforcement
+- Minimal change requirements
+- Testable changes only
+- Clear commit messages
+
 ### 📚 [`documentation-progress.mdc`](./documentation-progress.mdc)
 **Purpose**: Maintains comprehensive documentation and progress tracking
 
